@@ -8,18 +8,26 @@
       <button type="submit" class="btn btn-primary mb-2">Buscar</button>
     </form>
     <div class="text-center">
-      <img class="d-flex justify-content-center" :src="buscarImagen">
-      <p v-if="nombre_pokemon.length == 0">{{name_pikachu}} </p>
-      <p v-else>{{nombre_pokemon}} </p>
-      
-      <h2 class="display-4">Movimiento</h2>
-      <p>{{buscarMovimientos}}</p>
-      <h2 class="display-4">Habilidades</h2>
-      <ul v-for="(hab, index) in buscarHabilidades" :key="index">
-        <li >
-          {{hab.ability.name}}
-        </li>
-      </ul>
+      <div class="d-flex justify-content-around">
+        <img class="" :src="buscarImagen">
+        <p v-if="nombre_pokemon.length == 0" class="display-4">{{name_pikachu}} </p>
+        <p v-else class="display-4">{{nombre_pokemon}} </p>
+      </div>
+      <table class="table table-bordered container">
+        <thead>
+          <tr>
+            <th scope="col">Movimiento</th>
+            <th scope="col">Habilidades</th>
+          </tr>
+        </thead>
+        <tbody v-for="(hab, index) in buscarHabilidades" :key="index">
+          <tr>            
+            <td>{{buscarMovimientos}}</td>          
+            <td>
+              {{hab.ability.name}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -44,10 +52,15 @@ export default {
       .then(result => {
         this.resultado = result;
         this.nombre_pokemon = result.name;
-        console.log(this.nombre_pokemon)
-      }) 
+        this.imagen = result.sprites.front_default;
+        this.moves = result.moves[0].move.name;
+        this.habilidades = result.abilities;
+      })
       .catch(error => console.error(error))
-    }
+      console.log(this.nombre_pokemon)
+      this.nombre_pokemon = ''; 
+      console.log(this.nombre_pokemon)
+    },
   },
   computed: {
     buscarHabilidades(){
@@ -70,6 +83,7 @@ export default {
         this.habilidades = result.abilities;
       }) 
       .catch(error => console.error(error))
+  
   },
 }
 </script>
@@ -79,7 +93,7 @@ export default {
 form{
   margin-left: 40%;
 }
-img{
-  margin-left: 47%;
+li{
+  list-style-position: inside;
 }
 </style>
