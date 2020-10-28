@@ -9,9 +9,9 @@
     </form>
     <div class="text-center">
       <div class="d-flex justify-content-around">
-        <img class="" :src="buscarImagen">
         <p v-if="nombre_pokemon.length == 0" class="display-4">{{name_pikachu}} </p>
         <p v-else class="display-4">{{nombre_pokemon}} </p>
+        <img class="" :src="buscarImagen">
       </div>
       <table class="table table-bordered container">
         <thead>
