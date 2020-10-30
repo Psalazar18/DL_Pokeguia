@@ -13,21 +13,16 @@
         <p v-else class="display-4">{{nombre_pokemon}} </p>
         <img class="" :src="buscarImagen">
       </div>
-      <table class="table table-bordered container">
-        <thead>
-          <tr>
-            <th scope="col">Movimiento</th>
-            <th scope="col">Habilidades</th>
-          </tr>
-        </thead>
-        <tbody v-for="(hab, index) in buscarHabilidades" :key="index">
-          <tr>            
-            <td>{{buscarMovimientos}}</td>          
-            <td>
-              {{hab.ability.name}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <h2>Movimiento</h2>
+        <p>{{buscarMovimientos}}</p>
+      </div>
+      <div>
+        <h2>Habilidades</h2>
+        <ul v-for="(hab, index) in buscarHabilidades" :key="index">
+          <li>{{hab.ability.name}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -57,9 +52,6 @@ export default {
         this.habilidades = result.abilities;
       })
       .catch(error => console.error(error))
-      console.log(this.nombre_pokemon)
-      this.nombre_pokemon = ''; 
-      console.log(this.nombre_pokemon)
     },
   },
   computed: {
